@@ -6,17 +6,13 @@ using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeRepositoy_for_CS {
-
-    public class DoublyLinkedList<T> : IEnumerable<T> where T : class {
+namespace CodeRepositoy_for_CS
+{
+    public class DoublyLinkedList<T>
+    {
         public Node<T> head;
         public Node<T> tail;
         public int count = 0;
-
-        public DoublyLinkedList()
-        {
-            List<T> t = new List<T>();
-        }
 
         public void Insert(T t, int index)
         {
@@ -101,6 +97,8 @@ namespace CodeRepositoy_for_CS {
             {
                 var tmp = new Node<T>() { data = t };
                 tmp.parent = tail;
+                tmp.parent.child = tmp;
+                tail = tmp;
             }
             count++;
         }
@@ -158,7 +156,7 @@ namespace CodeRepositoy_for_CS {
             }
             else
             {
-                return null;
+                return default(T);
             }
         }
 
@@ -170,7 +168,7 @@ namespace CodeRepositoy_for_CS {
         {
             if (count <= 0)
             {
-                return null;
+                return default(T);
             }
             else
             {
@@ -182,6 +180,30 @@ namespace CodeRepositoy_for_CS {
                 }
                 count--;
                 return tmp.data;
+            }
+        }
+
+        public Node<T> GetAt(int index)
+        {
+            if (count > index)
+            {
+                Node<T> tmp = head;
+                for (int i = 0; i < count; i++)
+                {
+                    if (i == index)
+                    {
+                        return tmp;
+                    }
+                    else
+                    {
+                        tmp = tmp.child;
+                    }
+                }
+                return tmp;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
             }
         }
 
@@ -214,18 +236,19 @@ namespace CodeRepositoy_for_CS {
             }
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        //public IEnumerator<T> GetEnumerator()
+        //{
+        //    return new DoublyLinkedList<T>();
+        //}
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    yield return new DoublyLinkedList<T>();
+        //}
     }
 
-    public class Node<T> {
+    public class Node<T>
+    {
         public bool IsStart { get => parent == null ? true : false; }
 
         public bool IsEnd { get => child == null ? true : false; }
@@ -241,6 +264,87 @@ namespace CodeRepositoy_for_CS {
         public Node<T> Last()
         {
             return parent;
+        }
+    }
+
+    public class DoubleList<T> : IEnumerable<T>
+    {
+        private DoublyLinkedList<T> doublyLinkedList;
+
+        public DoubleList(DoublyLinkedList<T> doubleList)
+        {
+            doublyLinkedList = doubleList;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return new ForeachEnumerator<T>(doublyLinkedList);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return new ForeachEnumerator<T>(doublyLinkedList);
+        }
+    }
+
+    public class ForeachEnumerator<T> : IEnumerator<T>
+    {
+        private DoublyLinkedList<T> Current = null;
+
+        private int index = -1;
+
+        public ForeachEnumerator(DoublyLinkedList<T> doublyLinkedList)
+        {
+            Current = doublyLinkedList;
+        }
+
+        T IEnumerator<T>.Current
+        {
+            get
+            {
+                if (index >= 0 && index < Current.count)
+                {
+                    return Current.GetAt(index).data;
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+        }
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                if (index >= 0 && index < Current.count)
+                {
+                    return Current.GetAt(index).data;
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+        }
+
+        public bool MoveNext()
+        {
+            if (index + 1 < Current.count)
+            {
+                index++;
+                return true;
+            }
+            return false;
+        }
+
+        public void Reset()
+        {
+            index = -1;
         }
     }
 }

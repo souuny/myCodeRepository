@@ -9,3 +9,9 @@ D:\_OwnerSpace\GitDesktop\myCodeRepository\CodeRepositoy for CS\CodeRepositoy fo
 D:\_OwnerSpace\GitDesktop\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\obj\Debug\CodeRepositoy for CS.csproj.CoreCompileInputs.cache
 D:\_OwnerSpace\GitDesktop\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\obj\Debug\CodeRepositoy for CS.exe
 D:\_OwnerSpace\GitDesktop\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\obj\Debug\CodeRepositoy for CS.pdb
+G:\GitHub\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\bin\Debug\CodeRepositoy for CS.exe
+G:\GitHub\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\bin\Debug\CodeRepositoy for CS.pdb
+G:\GitHub\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\obj\Debug\CodeRepositoy for CS.csprojAssemblyReference.cache
+G:\GitHub\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\obj\Debug\CodeRepositoy for CS.csproj.CoreCompileInputs.cache
+G:\GitHub\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\obj\Debug\CodeRepositoy for CS.exe
+G:\GitHub\myCodeRepository\CodeRepositoy for CS\CodeRepositoy for CS\obj\Debug\CodeRepositoy for CS.pdb

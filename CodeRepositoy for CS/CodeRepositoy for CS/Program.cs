@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeRepositoy_for_CS {
-
-    public class Program {
-
+namespace CodeRepositoy_for_CS
+{
+    public class Program
+    {
         public static void Main(String[] args)
         {
             //SortTest();
@@ -24,6 +24,18 @@ namespace CodeRepositoy_for_CS {
                 linklist.Add(new Ixl());
             }
             Console.WriteLine(linklist.count);
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    Console.WriteLine(linklist.GetAt(i).data.t);
+            //}
+
+            DoubleList<Ixl> doubeList = new DoubleList<Ixl>(linklist);
+
+            foreach (Ixl ixl in doubeList)
+            {
+                Console.WriteLine(ixl.t);
+            }
         }
 
         public static void SortTest()
@@ -46,7 +58,8 @@ namespace CodeRepositoy_for_CS {
         }
     }
 
-    internal class Ixl {
+    internal class Ixl
+    {
         private static Random rd = new Random();
         public int t;
 
