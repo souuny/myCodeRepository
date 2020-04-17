@@ -8,11 +8,47 @@ using System.Threading.Tasks;
 
 namespace CodeRepositoy_for_CS
 {
-    public class DoublyLinkedList<T>
+    public class DoublyLinkedList<T> : IEnumerable<T>, IEnumerator<T>
     {
         public Node<T> head;
         public Node<T> tail;
         public int count = 0;
+
+        private Node<T> now;
+
+        private int index = -1;
+
+        T IEnumerator<T>.Current
+        {
+            get
+            {
+                if (index >= 0 && index < count)
+                {
+                    Node<T> temp = now;
+                    now = now.Next();
+                    return temp.data;
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+        }
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                if (index >= 0 && index < count)
+                {
+                    return now.data;
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+        }
 
         public void Insert(T t, int index)
         {
@@ -236,6 +272,44 @@ namespace CodeRepositoy_for_CS
             }
         }
 
+        public void Dispose()
+        {
+            //now = tail;
+        }
+
+        public bool MoveNext()
+        {
+            if (index + 1 < count)
+            {
+                index++;
+                return true;
+            }
+            return false;
+        }
+
+        public void Reset()
+        {
+            index = -1;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            if (now == null)
+            {
+                now = this.head;
+            }
+            return this;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            if (now == null)
+            {
+                now = this.head;
+            }
+            return this;
+        }
+
         //public IEnumerator<T> GetEnumerator()
         //{
         //    return new DoublyLinkedList<T>();
@@ -267,84 +341,84 @@ namespace CodeRepositoy_for_CS
         }
     }
 
-    public class DoubleList<T> : IEnumerable<T>
-    {
-        private DoublyLinkedList<T> doublyLinkedList;
+    //public class DoubleList<T> : IEnumerable<T>
+    //{
+    //    private DoublyLinkedList<T> doublyLinkedList;
 
-        public DoubleList(DoublyLinkedList<T> doubleList)
-        {
-            doublyLinkedList = doubleList;
-        }
+    //    public DoubleList(DoublyLinkedList<T> doubleList)
+    //    {
+    //        doublyLinkedList = doubleList;
+    //    }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return new ForeachEnumerator<T>(doublyLinkedList);
-        }
+    //    public IEnumerator<T> GetEnumerator()
+    //    {
+    //        return new ForeachEnumerator<T>(doublyLinkedList);
+    //    }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return new ForeachEnumerator<T>(doublyLinkedList);
-        }
-    }
+    //    IEnumerator IEnumerable.GetEnumerator()
+    //    {
+    //        return new ForeachEnumerator<T>(doublyLinkedList);
+    //    }
+    //}
 
-    public class ForeachEnumerator<T> : IEnumerator<T>
-    {
-        private DoublyLinkedList<T> Current = null;
+    //public class ForeachEnumerator<T> : IEnumerator<T>
+    //{
+    //    private DoublyLinkedList<T> Current = null;
 
-        private int index = -1;
+    //    private int index = -1;
 
-        public ForeachEnumerator(DoublyLinkedList<T> doublyLinkedList)
-        {
-            Current = doublyLinkedList;
-        }
+    //    public ForeachEnumerator(DoublyLinkedList<T> doublyLinkedList)
+    //    {
+    //        Current = doublyLinkedList;
+    //    }
 
-        T IEnumerator<T>.Current
-        {
-            get
-            {
-                if (index >= 0 && index < Current.count)
-                {
-                    return Current.GetAt(index).data;
-                }
-                else
-                {
-                    throw new IndexOutOfRangeException();
-                }
-            }
-        }
+    //    T IEnumerator<T>.Current
+    //    {
+    //        get
+    //        {
+    //            if (index >= 0 && index < Current.count)
+    //            {
+    //                return Current.GetAt(index).data;
+    //            }
+    //            else
+    //            {
+    //                throw new IndexOutOfRangeException();
+    //            }
+    //        }
+    //    }
 
-        object IEnumerator.Current
-        {
-            get
-            {
-                if (index >= 0 && index < Current.count)
-                {
-                    return Current.GetAt(index).data;
-                }
-                else
-                {
-                    throw new IndexOutOfRangeException();
-                }
-            }
-        }
+    //    object IEnumerator.Current
+    //    {
+    //        get
+    //        {
+    //            if (index >= 0 && index < Current.count)
+    //            {
+    //                return Current.GetAt(index).data;
+    //            }
+    //            else
+    //            {
+    //                throw new IndexOutOfRangeException();
+    //            }
+    //        }
+    //    }
 
-        public void Dispose()
-        {
-        }
+    //    public void Dispose()
+    //    {
+    //    }
 
-        public bool MoveNext()
-        {
-            if (index + 1 < Current.count)
-            {
-                index++;
-                return true;
-            }
-            return false;
-        }
+    //    public bool MoveNext()
+    //    {
+    //        if (index + 1 < Current.count)
+    //        {
+    //            index++;
+    //            return true;
+    //        }
+    //        return false;
+    //    }
 
-        public void Reset()
-        {
-            index = -1;
-        }
-    }
+    //    public void Reset()
+    //    {
+    //        index = -1;
+    //    }
+    //}
 }

@@ -30,9 +30,9 @@ namespace CodeRepositoy_for_CS
             //    Console.WriteLine(linklist.GetAt(i).data.t);
             //}
 
-            DoubleList<Ixl> doubeList = new DoubleList<Ixl>(linklist);
+            //DoubleList<Ixl> doubeList = new DoubleList<Ixl>(linklist);
 
-            foreach (Ixl ixl in doubeList)
+            foreach (Ixl ixl in linklist)
             {
                 Console.WriteLine(ixl.t);
             }
